@@ -5,7 +5,7 @@ require_once 'Database.php';
 interface DatabaseObject
 {
     /**
-     * Creates a new object in the database
+     * Creates a new object in the database ...
      * @return integer ID of the newly created object (lastInsertId)
      */
     public function create();
