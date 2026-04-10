@@ -262,7 +262,7 @@ class Purchase implements DatabaseObject, JsonSerializable
     }
 
     /**
-     * @return array
+     * @return arrayaa
      */
     public function getErrors()
     {
