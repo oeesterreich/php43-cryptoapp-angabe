@@ -5,7 +5,7 @@ class Database
     private static $dbName = 'php43_angabe';
     private static $dbHost = 'mysql';
     private static $dbUsername = 'root';
-    private static $dbUserPassword = '123';
+    private static $dbUserPassword = 'root';
 
     private static $conn = null;
 
