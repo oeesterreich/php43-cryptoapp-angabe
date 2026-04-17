@@ -95,7 +95,7 @@ class PurchaseRESTController extends RESTController
     }
 
     /**
-     * delete purchase: DELETE api.php?r=purchase/25 -> args[0] = 25
+     * delete purchasaae: DELETE api.php?r=purchase/25 -> args[0] = 25
      */
     private function handleDELETERequest()
     {
