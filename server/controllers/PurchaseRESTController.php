@@ -16,6 +16,7 @@ class PurchaseRESTController extends RESTController
                 break;
             case 'PUT':
                 $this->handlePUTRequest();
+
                 break;
             case 'DELETE':
                 $this->handleDELETERequest();
@@ -60,6 +61,7 @@ class PurchaseRESTController extends RESTController
         $model->setAmount($this->getDataOrNull('amount'));
         $model->setPrice($this->getDataOrNull('price'));
         $model->setCurrency($this->getDataOrNull('currency'));
+        $model->setWalletId($this->getDataOrNull('wallet_id'));
 
         if ($model->save()) {
             $this->response("OK", 201);
