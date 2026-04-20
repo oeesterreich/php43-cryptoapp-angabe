@@ -9,6 +9,7 @@ class Purchase implements DatabaseObject, JsonSerializable
     private $currency;
     private $amount;
     private $price;
+    private $wallet_id;
 
     private $errors = [];
 
@@ -43,9 +44,9 @@ class Purchase implements DatabaseObject, JsonSerializable
     public function create()
     {
         $db = Database::connect();
-        $sql = "INSERT INTO purchase (date, amount, price, currency) values(?, ?, ?, ?)";
+        $sql = "INSERT INTO purchase (date, amount, price, currency, wallet_id) values(?, ?, ?, ?, ?)";
         $stmt = $db->prepare($sql);
-        $stmt->execute(array($this->date, $this->amount, $this->price, $this->currency));
+        $stmt->execute(array($this->date, $this->amount, $this->price, $this->currency, $this->wallet_id));
         $lastId = $db->lastInsertId();
         Database::disconnect();
         return $lastId;
@@ -57,9 +58,9 @@ class Purchase implements DatabaseObject, JsonSerializable
     public function update()
     {
         $db = Database::connect();
-        $sql = "UPDATE purchase set date = ?, amount = ?, price = ?, currency = ? WHERE id = ?";
+        $sql = "UPDATE purchase set date = ?, amount = ?, price = ?, currency = ?, wallet_id = ? WHERE id = ?";
         $stmt = $db->prepare($sql);
-        $stmt->execute(array($this->date, $this->amount, $this->price, $this->currency, $this->id));
+        $stmt->execute(array($this->date, $this->amount, $this->price, $this->currency, $this->wallet_id, $this->id));
         Database::disconnect();
     }
 
@@ -106,8 +107,19 @@ class Purchase implements DatabaseObject, JsonSerializable
      */
     public static function getAllGroupByCurrency($currency = '')
     {
-        // TODO
-        return [];
+        $db = Database::connect();
+        if ($currency !== '') {
+            $sql = "SELECT * FROM purchase WHERE currency = ? ORDER BY date DESC";
+            $stmt = $db->prepare($sql);
+            $stmt->execute([$currency]);
+        } else {
+            $sql = "SELECT * FROM purchase ORDER BY currency ASC, date DESC";
+            $stmt = $db->prepare($sql);
+            $stmt->execute();
+        }
+        $items = $stmt->fetchAll(PDO::FETCH_CLASS, 'Purchase');
+        Database::disconnect();
+        return $items;
     }
 
     /**
@@ -178,6 +190,7 @@ class Purchase implements DatabaseObject, JsonSerializable
             "currency" => $this->currency,
             "amount" => doubleval($this->amount),
             "price" => doubleval($this->price),
+            "wallet_id" => $this->wallet_id ? intval($this->wallet_id) : null,
         ];
     }
 
@@ -269,12 +282,8 @@ class Purchase implements DatabaseObject, JsonSerializable
         return $this->errors;
     }
 
-    /**
-     * @param array $errors
-     */
-    public function setErrors($errors)
-    {
-        $this->errors = $errors;
-    }
+    public function setErrors($errors) { $this->errors = $errors; }
+    public function getWalletId() { return $this->wallet_id; }
+    public function setWalletId($wallet_id) { $this->wallet_id = $wallet_id; }
 
 }

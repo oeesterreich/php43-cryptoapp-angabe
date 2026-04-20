@@ -17,6 +17,14 @@ if ($controller == 'purchase') {
     } catch(Exception $e) {
         RESTController::responseHelper($e->getMessage(), $e->getCode());
     }
+} elseif ($controller == 'wallet') {
+    require_once('controllers/WalletRESTController.php');
+
+    try {
+        (new WalletRESTController())->handleRequest();
+    } catch(Exception $e) {
+        RESTController::responseHelper($e->getMessage(), $e->getCode());
+    }
 } else {
     RESTController::responseHelper('REST-Controller "' . $controller . '" not found', '404');
 }

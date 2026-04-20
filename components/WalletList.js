@@ -1,7 +1,15 @@
 app.component('wallet-list', {
     props: {
+        wallets: {
+            type: Array,
+            required: true
+        },
         purchases: {
             type: Array,
+            required: true
+        },
+        prices: {
+            type: Object,
             required: true
         }
     },
@@ -9,24 +17,32 @@ app.component('wallet-list', {
     /*html*/
         `
     <div class="wallet-list">
-        <h3>My Purchases</h3>
+        <h3>Wallet Summary</h3>
         <ul>
-            <li v-for="purchase in purchases" :key="purchase.id">
-                <strong>{{ purchase.currency }}</strong> &mdash;
-                Amount: {{ purchase.amount }} &mdash;
-                Price: {{ purchase.price }} &mdash;
-                Date: {{ purchase.date }}
-                <button @click="$emit('delete-purchase', purchase.id)">Delete</button>
+            <li v-for="wallet in walletSummaries" :key="wallet.id">
+                <strong>{{ wallet.name }}</strong><br/>
+                Total Invested: {{ wallet.totalInvested.toFixed(2) }} EUR &mdash;
+                Current Value: {{ wallet.totalValue.toFixed(2) }} EUR &mdash;
+                Gain: <span :style="{ color: wallet.gain >= 0 ? 'green' : 'red' }">
+                    {{ wallet.gain.toFixed(2) }}%
+                </span>
             </li>
         </ul>
-        <p v-if="purchases.length === 0">No purchases yet.</p>
+        <p v-if="wallets.length === 0">No wallets yet.</p>
     </div>
     `,
-    emits: ['delete-purchase'],
-    methods: {
-
-    },
     computed: {
-
+        walletSummaries() {
+            return this.wallets.map(wallet => {
+                const walletPurchases = this.purchases.filter(p => p.wallet_id === wallet.id);
+                const totalInvested = walletPurchases.reduce((sum, p) => sum + p.price, 0);
+                const totalValue = walletPurchases.reduce((sum, p) => {
+                    const rate = this.prices[p.currency];
+                    return sum + (rate ? p.amount * parseFloat(rate.EUR) : p.price);
+                }, 0);
+                const gain = totalInvested > 0 ? ((totalValue - totalInvested) / totalInvested) * 100 : 0;
+                return { ...wallet, totalInvested, totalValue, gain };
+            });
+        }
     }
 })

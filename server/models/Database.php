@@ -3,7 +3,7 @@
 class Database
 {
     private static $dbName = 'php43_angabe';
-    private static $dbHost = 'mysql';
+    private static $dbHost = 'localhost';
     private static $dbUsername = 'root';
     private static $dbUserPassword = 'root';
 

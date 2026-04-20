@@ -93,6 +93,14 @@ p {
   display: flex;
   flex-direction: column;
   padding: 1rem;
+  gap: 0;
+}
+
+.section-row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: flex-start;
 }
 
 .wallet-container {
@@ -108,10 +116,11 @@ p {
 
 .wallet-form, .wallet-list {
   display: flex;
-  width: 425px;
+  flex: 1;
+  min-width: 300px;
   flex-direction: column;
   padding: 20px;
-  margin: 40px;
+  margin: 20px;
   border: 2px solid #d8d8d8;
   background-color: white;
   -webkit-box-shadow: 0px 2px 15px -12px rgba(0, 0, 0, 0.57);
@@ -120,7 +129,10 @@ p {
 }
 
 .wallet-container {
+  flex: 1;
+  min-width: 300px;
   padding: 20px;
+  margin: 20px;
   background-color: white;
   -webkit-box-shadow: 0px 2px 20px -12px rgba(0, 0, 0, 0.57);
   -moz-box-shadow: 0px 2px 20px -12px rgba(0, 0, 0, 0.57);

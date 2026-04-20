@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8"/>
-    <title>TODO CryptoApp</title>
+    <title>CryptoApp</title>
     <!-- Import Styles -->
     <link rel="stylesheet" href="assets/styles.css"/>
     <!-- Import Vue.js -->
@@ -11,19 +11,23 @@
 </head>
 <body>
 <div id="app">
-    <div class="nav-bar"><h3>TODO CryptoApp</h3></div>
-    <app-display :prices="prices" :purchases="purchases" @add-to-wallet="addPurchase"></app-display>
+    <div class="nav-bar"><h3>CryptoApp</h3></div>
+    <app-display :prices="prices" :purchases="purchases" :wallets="wallets" @add-to-wallet="addPurchase" @delete-purchase="deletePurchase" @add-wallet="addWallet"></app-display>
 </div>
 
 <!-- Import App -->
 <script src="main.js"></script>
 
 <!-- Import Components -->
-<script src="components/WalletDisplay.js"></script>
+<script src="components/PurchaseList.js"></script>
+<script src="components/WalletList.js"></script>
+<script src="components/WalletDetail.js"></script>
+<script src="components/PurchaseForm.js"></script>
+<script src="components/AppDisplay.js"></script>
 
 <!-- Mount App -->
 <script>
-    const a = app.mount('#app')
+    app.mount('#app');
 </script>
 </body>
 </html>
