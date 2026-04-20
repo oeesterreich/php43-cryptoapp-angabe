@@ -25,7 +25,7 @@ interface DatabaseObject
 
     /**
      * Get an array of objects .from database. ...
-     * @return array array of objects or empty array
+     * @return array array .of objects or empty array
      */
     public static function getAll();
 
