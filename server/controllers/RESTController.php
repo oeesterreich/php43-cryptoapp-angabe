@@ -30,6 +30,12 @@ abstract class RESTController
     protected $args = Array();
 
     /**
+     * Property: request
+     * Stores cleaned GET/POST input
+     */
+    protected $request = [];
+
+    /**
      * Property: file
      * Stores the input of the PUT request
      */
