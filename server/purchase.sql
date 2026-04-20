@@ -29,12 +29,12 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `purchase` (
-                            `id` int(11) NOT NULL,
-                            `date` datetime NOT NULL,
-                            `amount` double NOT NULL,
-                            `price` double NOT NULL,
-                            `currency` varchar(64) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+    `id` int(11) NOT NULL,
+    `date` datetime NOT NULL,
+    `amount` double NOT NULL,
+    `price` double NOT NULL,
+    `currency` varchar(64) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Daten für Tabelle `purchase`
@@ -52,9 +52,6 @@ INSERT INTO `purchase` (`id`, `date`, `amount`, `price`, `currency`) VALUES
 -- Indizes der exportierten Tabellen
 --
 
---
--- Indizes für die Tabelle `purchase`
---
 ALTER TABLE `purchase`
     ADD PRIMARY KEY (`id`);
 
@@ -62,11 +59,9 @@ ALTER TABLE `purchase`
 -- AUTO_INCREMENT für exportierte Tabellen
 --
 
---
--- AUTO_INCREMENT für Tabelle `purchase`
---
 ALTER TABLE `purchase`
     MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
