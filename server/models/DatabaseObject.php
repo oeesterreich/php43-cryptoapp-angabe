@@ -23,7 +23,7 @@ interface DatabaseObject
      */
     public static function get($id);
 
-    /**
+    /**.
      * Get an .array of objects .from database. ...
      * @return array array .of objects or empty array
      */
